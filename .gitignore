@@ -27,3 +27,12 @@ replay_pid*
 
 __pycache__
 .venv
+
+**/.hg
+**/CVS
+**/Thumbs.db
+**/.git
+**/.svn
+**/.DS_Store
+
+db.sqlite3

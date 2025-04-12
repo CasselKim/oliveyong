@@ -1,0 +1,204 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+  }
+  
+  /* 대문 스타일 */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 로고를 중앙에 정렬 */
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 20px;
+  }
+  
+  .header img {
+    height: 80px;
+  }
+  
+  /* 상단 네비게이션 바 (segment 선택) 추가 */
+  .navbar {
+    background: #f5f5f5;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .navbar form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin:0;
+  }
+  
+  .navbar select {
+    font-size:14px;
+    padding:2px;
+  }
+  
+  .navbar button {
+    font-size:14px;
+    padding:2px 5px;
+    cursor: pointer;
+  }
+  
+  /* 카테고리 필터 스타일 */
+  .category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px;
+  }
+  
+  .category-filter a {
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .category-filter a.active {
+    background: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  /* brand-filter를 category-filter와 동일한 스타일로 적용 */
+  .brand-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px; /* 카테고리 필터 아래 동일 간격 */
+  }
+
+  .brand-filter a {
+    padding: 5px 10px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+
+  .brand-filter a.active {
+    background: #f5f5f5;
+    font-weight: bold;
+  }
+
+  /* 상품 그리드 스타일 */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fafafa;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    position: relative;
+    background: #fff;
+  }
+  
+  .product-card .rank {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #f3f3f3;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: bold;
+    color:#ff0040;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    display:block;
+    margin-bottom: 10px;
+  }
+  
+  .product-card .brand {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .product-card .name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom:5px;
+  }
+  
+  .price-area {
+    margin-top:10px;
+  }
+  
+  .price-area .original {
+    text-decoration: line-through;
+    margin-right: 5px;
+    color:#999;
+  }
+  
+  .price-area .sale {
+    color:#e80000;
+    font-weight:bold;
+  }
+  
+  .tags {
+    margin-top:5px;
+  }
+  
+  .tags span {
+    display:inline-block;
+    font-size:12px;
+    background:#eee;
+    padding:2px 5px;
+    border-radius:3px;
+    margin-right:3px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 5px;
+  }
+  
+  .page-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 3px;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .page-btn:hover {
+    background: #f0f0f0;
+  }
+  
+  .page-btn.active {
+    background: #ff0040;
+    color: #fff;
+    border-color: #ff0040;
+  }
+  
+  /* 랭킹 섹션 스타일 */
+  h1 {
+    font-size: 20px;
+    margin:20px;
+  }
+  
+  p {
+    margin:20px;
+    font-size:14px;
+  }

@@ -1,0 +1,100 @@
+{% load static %}
+{% load app_filters %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Oliveyong Mock Site</title>
+<link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+</head>
+<body>
+<!-- 대문 영역 -->
+<div class="header">
+  <img src="{% static 'img/logo.png' %}" alt="Oliveyong Logo">
+</div>
+
+<!-- Segment 선택 navbar -->
+<div class="navbar">
+  <form method="get">
+    <label for="segment_select" style="font-size:14px;">Segment:</label>
+    <select name="segment" id="segment_select" onchange="this.form.submit()">
+      <option value="GOLD OLIVE" {% if current_segment == "GOLD OLIVE" %}selected{% endif %}>GOLD OLIVE</option>
+      <option value="BLACK OLIVE" {% if current_segment == "BLACK OLIVE" %}selected{% endif %}>BLACK OLIVE</option>
+      <option value="GREEN OLIVE" {% if current_segment == "GREEN OLIVE" %}selected{% endif %}>GREEN OLIVE</option>
+      <option value="PINK OLIVE" {% if current_segment == "PINK OLIVE" %}selected{% endif %}>PINK OLIVE</option>
+      <option value="BABY OLIVE" {% if current_segment == "BABY OLIVE" %}selected{% endif %}>BABY OLIVE</option>
+      <option value="NO OLIVE" {% if current_segment == "NO OLIVE" %}selected{% endif %}>NO OLIVE</option>
+    </select>
+  </form>
+</div>
+
+<div class="category-filter">
+  <!-- 전체 -->
+  <a href="{% if current_segment or selected_brand %}?{% endif %}{% if current_segment %}segment={{current_segment}}{% endif %}{% if selected_brand %}{% if current_segment %}&{% endif %}brand={{selected_brand}}{% endif %}"
+     class="{% if not selected_category %}active{% endif %}">
+    All
+  </a>
+
+  {% for cat in categories %}
+  <a href="?category={{cat}}{% if current_segment %}&segment={{current_segment}}{% endif %}{% if selected_brand %}&brand={{selected_brand}}{% endif %}"
+     class="{% if cat == selected_category %}active{% endif %}">
+    {{ cat }}
+  </a>
+  {% endfor %}
+</div>
+
+<!-- 브랜드 필터 영역 -->
+<div class="brand-filter">
+  <a href="?category={{selected_category}}{% if current_segment %}&segment={{current_segment}}{% endif %}" class="{% if not selected_brand %}active{% endif %}">All Brands</a>
+  {% for b in brands %}
+    <a href="?category={{selected_category}}{% if current_segment %}&segment={{current_segment}}{% endif %}&brand={{b.id}}" class="{% if selected_brand == b.id|stringformat:"s" %}active{% endif %}">{{ b.name }}</a>
+  {% endfor %}
+</div>
+
+<div class="product-grid">
+  {% for product in products %}
+  <div class="product-card">
+    <div class="rank">{{ forloop.counter }}</div>
+    <img src="{% static product.thumbnail %}" alt="{{ product.name }}"/>
+    <div class="brand">{{ product.brand }}</div>
+    <div class="name">{{ product.name }}</div>
+    <div class="price-area">
+      {% if product.has_campaign %}
+        <span class="original">{{ product.price }}원</span>
+        <span class="sale">{{ product.sale_price }}원</span>
+      {% else %}
+        <span class="sale" style="text-decoration:none">{{ product.price }}원</span>
+      {% endif %}
+    </div>
+    <div class="tags">
+      {% for t in product.tags %}
+      <span>{{t}}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- 페이지네이션 -->
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?category={{selected_category}}&page={{ page_obj.previous_page_number }}{% if current_segment %}&segment={{current_segment}}{% endif %}{% if selected_brand %}&brand={{selected_brand}}{% endif %}" class="page-btn">이전</a>
+  {% endif %}
+
+  {% for num in page_range_display %}
+    {% if num == page_obj.number %}
+      <span class="page-btn active">{{ num }}</span>
+    {% else %}
+      <a href="?category={{selected_category}}&page={{ num }}{% if current_segment %}&segment={{current_segment}}{% endif %}{% if selected_brand %}&brand={{selected_brand}}{% endif %}" class="page-btn">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a href="?category={{selected_category}}&page={{ page_obj.next_page_number }}{% if current_segment %}&segment={{current_segment}}{% endif %}{% if selected_brand %}&brand={{selected_brand}}{% endif %}" class="page-btn">다음</a>
+  {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: oliveyong_db
+      MYSQL_USER: oliveyong_user
+      MYSQL_PASSWORD: secret_password
+      MYSQL_ROOT_PASSWORD: root_secret
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_NAME: oliveyong_db
+      DB_USER: oliveyong_user
+      DB_PASSWORD: secret_password
+      DB_PORT: 3306
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"

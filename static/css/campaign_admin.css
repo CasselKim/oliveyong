@@ -1,0 +1,48 @@
+#filter-controls {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-width: 600px;
+  margin-bottom: 20px; /* 하단 여백 추가로 Save 영역과 공간 확보 */
+}
+
+#filters-container {
+  margin-top: 10px; 
+}
+
+.filter-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px; 
+  position: relative;
+}
+
+.filter-card select,
+.filter-card input {
+  vertical-align: middle;
+  margin-right: 5px;
+  width: auto;
+}
+
+.filter-card .remove-filter {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 18px;
+  color: #555;
+}
+
+.filter-card .remove-filter:hover {
+  color: #c00;
+}
+
+#add-filter-btn {
+  margin-top: 10px; 
+}

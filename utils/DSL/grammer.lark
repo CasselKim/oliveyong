@@ -1,0 +1,26 @@
+?start: or_expr
+
+?or_expr: and_expr
+        | or_expr "OR" and_expr   -> or_operation
+
+?and_expr: condition_group
+         | and_expr "AND" condition_group  -> and_operation
+
+?condition_group: condition
+                | "(" or_expr ")"
+
+?condition: NAME OPERATOR value              -> simple_condition
+          | NAME "IN" "[" value_list "]"     -> in_condition
+
+OPERATOR: "=" | ">" | "<" | ">=" | "<="
+NAME: /[a-zA-Z_][a-zA-Z0-9_]*/
+
+?value: NUMBER
+      | STRING
+
+value_list: (value ("," value)*)
+
+%import common.ESCAPED_STRING   -> STRING
+%import common.SIGNED_NUMBER    -> NUMBER
+%import common.WS
+%ignore WS
